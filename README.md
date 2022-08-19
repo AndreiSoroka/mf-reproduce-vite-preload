@@ -1,16 +1,34 @@
-
 ## Reproduced Bug
 
-If two applications have components with the same name
-then the second application will override the first component
+First, `preload-helper` loads the script on the wrong path.
+But after the second attempt, the path is right
 
-![](./ezgif-2-29813dca47.gif)
-### How to start:
+![img.png](img.png)
+
+![img_1.png](img_1.png)
+
+![img_2.png](img_2.png)
+
+![](ezgif-2-1c7dd1f3cc.gif)
+
+### How to reproduce:
 ```bash
-cd service-a; npm run i; npm run serve; # port 8080
-cd service-b1; npm run i; npm run serve; # port 8081
-cd service-b2; npm run i; npm run serve; # port 8082
-cd service-b3; npm run i; npm run serve; # port 8084
-cd service-c; npm run i; npm run serve; # port 8083
+#terminal 1
+cd host;
+npm i;
+npm run build:watch;
+
+#terminal 2
+cd host;
+npm run preview;
+
+#terminal 3
+cd remote-app;
+npm i;
+npm run build:watch;
+
+#terminal 4
+cd remote-app;
+npm run preview;
 ```
 and open http://localhost:8080
